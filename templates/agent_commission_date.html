@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Specific Commission</title>
+    <link
+      rel="icon"
+      href="{{url_for('static',filename='images/icon_flight.png')}}"
+      type="image/x-icon"
+    />
+  </head>
+
+  <body>
+    {% extends 'base_agent.html' %} {% block content %}
+        <hr />
+        <img
+          class="header"
+          src="{{url_for('static',filename='images/icon_flight.png')}}"
+          alt="An icon of an airplane"
+        />
+        <h1>My Commision from {{depart_date}} to {{arrival_date}}</h1>
+        <hr>
+        <a
+        href="/agent_home"
+        class="btn btn-outline-secondary btn-sm"
+        tabindex="-1"
+        role="button"
+        aria-disabled="true"
+        >Back</a
+      >
+</br>
+<div class="card" style="width: 60rem;">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><span>Total amount of commission received: </span>
+      {{total_commission}}<br /></li>
+    <li class="list-group-item">      <span>Total numbers of tickets sold: </span>{{ticket_amount}}
+    </li>
+  </ul>
+</div>
+ 
+    <br />{%endblock%}  </body>
+</html>

@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <title>Flights Info</title>
+    <link
+      rel="icon"
+      href="{{url_for('static',filename='images/icon_flight.png')}}"
+      type="image/x-icon"
+    />
+  </head>
+
+  <body>
+    {% extends 'base_customer.html' %} {% block content %}
+    <hr />
+    <img
+      class="header"
+      src="{{url_for('static',filename='images/icon_flight.png')}}"
+      alt="An icon of an airplane"
+    />
+
+    <h1>Booked Flights from {{depart_date}} to {{arrival_date}}</h1>
+    <hr />
+    <a
+      href="/customer_home"
+      class="btn btn-outline-secondary btn-sm"
+      tabindex="-1"
+      role="button"
+      aria-disabled="true"
+      >Back</a
+    >
+
+    <div class="card">
+      <div class="card-body">
+        <table class="table table-hover">
+          <th>Ticket ID</th>
+          <th>Flight ID</th>
+          <th>Departure Airport</th>
+          <th>Departure Time</th>
+          <th>Arrival Airport</th>
+          <th>Arrival Time</th>
+
+          {% for line in posts %}
+          <tr>
+            <td>{{line.ticket_id}}</td>
+            <td>{{line.airline_name}} {{line.flight_num}}</td>
+            <td>{{line.departure_airport}}</td>
+            <td>{{line.departure_time}}</td>
+            <td>{{line.arrival_airport}}</td>
+            <td>{{line.arrival_time}}</td>
+
+            <!-- <td>{{line[0]}}</td>
+                <td>{{line[1]}} {{line[2]}}</td>
+                <td>{{line[3]}}</td>
+                <td>{{line[4]}}</td>
+                <td>{{line[5]}}</td>
+                <td>{{line[6]}}</td> -->
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+    <div>
+      {% if error %}
+      <p class="error"><strong>Error:</strong> {{error}}</p>
+      {% endif %}
+    </div>
+
+    {%endblock%}
+  </body>
+</html>

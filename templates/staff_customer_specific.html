@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <title>Staff Home</title>
+    <link
+      rel="icon"
+      href="{{url_for('static',filename='images/icon_flight.png')}}"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    {% extends 'base_staff.html' %} {% block content %}
+        <hr />
+        <img
+          class="header"
+          src="{{url_for('static',filename='images/icon_flight.png')}}"
+          alt="An icon of an airplane"
+        />
+        <h1>{{customer}} Flight History</h1>
+        <hr>
+        <a
+        href="/staff_home"
+        class="btn btn-outline-secondary btn-sm"
+        tabindex="-1"
+        role="button"
+        aria-disabled="true"
+        >Back</a
+      >
+</br>
+    {% if error %}
+    <p class="error"><strong>Error:</strong> {{error}}</p>
+    {% endif %}
+
+
+    <div>
+      <table class="table table-hover">
+        <th>Purchase Date</th>
+        <th>Flight Number</th>
+        <th>Ticket ID</th>
+        <th>Booking Agent</th>
+
+        {% for line in results %}
+        <tr>
+          <td>{{line['purchase_date']}}</td>
+          <td>{{line['flight_num']}}</td>
+          <td>{{line['ticket_id']}}</td>
+          <td>{{line['booking_agent_id']}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    {%endblock%}
+  </body>
+</html>

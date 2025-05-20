@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>Viewcustomers</title>
+        <link
+        rel="icon"
+        href="{{url_for('static',filename='images/icon_flight.png')}}"
+        type="image/x-icon"
+      />
+    </head>
+    
+    <body>
+        {% extends 'base_staff.html' %} {% block content %}
+        <hr />
+        <img
+          class="header"
+          src="{{url_for('static',filename='images/icon_flight.png')}}"
+          alt="An icon of an airplane"
+        />
+        <h1>View Customers</h1>
+        <hr>
+        <a
+        href="/staff_home"
+        class="btn btn-outline-secondary btn-sm"
+        tabindex="-1"
+        role="button"
+        aria-disabled="true"
+        >Back</a
+      >
+        {% if error %}
+                <p class="error"><strong>Error:</strong> {{error}}</p>
+        {% endif %}
+
+        
+    </br>
+    <div class="card">
+        <div class="card-body">
+        
+        <h3>The Most Frequent Customer in Last Year</h3>
+
+        <table class="table table-hover">
+            <th>Customer Name</th>
+            <th>Customer Email</th>
+            <th>Tickets Purchased</th>
+            
+        {% for line in results %}
+            <tr>
+                <td>{{line['name']}}</td>
+                <td>{{line['customer_email']}}</td>
+                <td>{{line['ticket_purchased']}}</td>
+            </tr>
+        {% endfor %}
+
+        </table></br>
+        </div></div>
+<br>
+        <div class="card">
+            <div class="card-body">
+        
+            <h3>View a specific customers' flight history</h3>
+            <form action="/staff_home/staff_customer/specific" method="POST">
+                <b>Customer Email</b></br>
+                <input type="text" name = "email" placeholder="Customer Email" required/> </br><br>
+                <input type="submit" class="btn btn-dark" value = Search />
+    
+            </form>
+            </div>
+        </div>
+        
+
+        {%endblock%}
+
+    </body>
+</html>

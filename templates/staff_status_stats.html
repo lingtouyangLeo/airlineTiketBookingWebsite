@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <title>View Flight Status Stats</title>
+        <link
+        rel="icon"
+        href="{{url_for('static',filename='images/icon_flight.png')}}"
+        type="image/x-icon"
+      />
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {
+                packages: ['corechart']
+            });
+        </script>
+    </head>
+
+    <body>
+        {% extends 'base_staff.html' %} {% block content %}
+        <hr />
+        <img
+          class="header"
+          src="{{url_for('static',filename='images/icon_flight.png')}}"
+          alt="An icon of an airplane"
+        />
+        <h1>Flight Status Statistics</h1>
+        <hr>
+        <a
+        href="/staff_home"
+        class="btn btn-outline-secondary btn-sm"
+        tabindex="-1"
+        role="button"
+        aria-disabled="true"
+        >Back</a
+      >
+        {% if error %}
+        <p class="error"><strong>Error:</strong> {{error}}</p>
+        {% endif %}
+        </br>
+        <div class="card">
+            <div class="card-body">
+
+                <h2>Last 3 Months:</h2></br>
+                <div id="mcontainer" style="width: 350px; height: 200px; margin: 0 auto"></div></br>
+                <h3>The percentage of the punctuality of airplane in last 3 months is {{results1}}.</h3></br>
+            </br></br>
+<hr>         
+                <h2>Last Year:</h2></br>
+                <div id="ycontainer" style="width: 350px; height: 200px; margin: 0 auto"></div></br></br></br></br>
+                <h3>The percentage of the punctuality of airplane in last year is {{results2}}.</h3></br>
+                <script language="JavaScript">
+                    function drawMChart() {
+                        // var a = [['Direct sales','Indirect sales'],[parseInt('{{mdirect}}'),parseInt('{{mindirect}}')]];
+                        // console.log(a);
+                        
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'status');
+                        data.addColumn('number', 'amount');
+                        data.addRows([
+                        ['On-time',  parseInt('{{data1}}')],
+                        ['Delayed', parseInt('{{data2}}')]
+                        ]);
+        
+                        var options = {
+                            title: 'Last 3 Months',
+                            sliceVisibilityThreshold: 0,
+                            pieSliceText: 'value',
+                            chartArea: {
+                                left: 10,
+                                top: 10,
+                                width: '100%',
+                                height: '90%'
+                            },
+                            tooltip: {
+                                trigger: 'none',
+                                text: 'value'
+                            }
+                        };
+                        var chart = new google.visualization.PieChart(document.getElementById('mcontainer'));
+                        chart.draw(data, options);
+                    }
+                    google.charts.setOnLoadCallback(drawMChart);
+        
+                    
+                    function drawYChart() {
+                        // var a = [['Direct sales','Indirect sales'],[parseInt('{{mdirect}}'),parseInt('{{mindirect}}')]];
+                        // console.log(a);
+                        
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'status');
+                        data.addColumn('number', 'amount');
+                        data.addRows([
+                        ['On-time',  parseInt('{{data3}}')],
+                        ['Delayed', parseInt('{{data4}}')]
+                        ]);
+        
+                        var options = {
+                            title: 'Last Year',
+                            sliceVisibilityThreshold: 0,
+                            pieSliceText: 'value',
+                            chartArea: {
+                                left: 10,
+                                top: 10,
+                                width: '100%',
+                                height: '90%'
+                            },
+                            tooltip: {
+                                trigger: 'none',
+                                text: 'value'
+                            }
+                        };
+                        var chart = new google.visualization.PieChart(document.getElementById('ycontainer'));
+                        chart.draw(data, options);
+                    }
+                    google.charts.setOnLoadCallback(drawYChart);
+                </script>            </div>
+          </div>
+        
+        
+
+        {%endblock%}
+
+    </body>
+
+
+</html>

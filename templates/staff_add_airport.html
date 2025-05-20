@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <meta charset="utf-8"> 
+        <link
+        rel="icon"
+        href="{{url_for('static',filename='images/icon_flight.png')}}"
+        type="image/x-icon"
+      />
+        <title>Add Airport</title> 
+    </head>
+    
+    <body>
+        {% extends 'base_staff.html' %} {% block content %}
+    <hr />
+    <img
+      class="header"
+      src="{{url_for('static',filename='images/icon_flight.png')}}"
+      alt="An icon of an airplane"
+    />
+    <h1>Add Airport</h1>
+    <hr>
+    <a
+    href="/staff_home"
+    class="btn btn-outline-secondary btn-sm"
+    tabindex="-1"
+    role="button"
+    aria-disabled="true"
+    >Back</a
+  >
+    {% if error %}
+        <p class="error"><strong>Error:</strong> {{error}}</p>
+    {% endif %}
+    <div class="card">
+      <div class="card-body">
+        <form action='/staff_home/staff_add_airport/adding' method='POST'>
+          <br>
+            <input type="text" name = "airport" placeholder="Airport Name" required/> </br><br>
+            <input type="text" name = "city" placeholder="City Name" required/> </br>  <br>
+            <input type="submit" class="btn btn-dark" value = Submit />
+        </form>
+    </div></div>
+
+{%endblock%}    </body>
+
+
+</html>

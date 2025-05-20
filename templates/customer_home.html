@@ -1,0 +1,236 @@
+<html>
+    <head>
+        <meta charset="utf-8"> 
+        <title>Customer Home</title> 
+        <link
+      rel="icon"
+      href="{{url_for('static',filename='images/icon_flight.png')}}"
+      type="image/x-icon"
+    />
+    </head>
+<body>
+    {% extends 'base_customer.html' %} {% block content %}
+    <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+        <strong>Welcome! {{username}} !</strong> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <hr />
+    <img
+      class="header"
+      src="{{url_for('static',filename='images/icon_flight.png')}}"
+      alt="An icon of an airplane"
+    />
+<h1>Home</h1>
+<hr>
+    
+    {% if message %}
+        <h2>{{message}}</h2></br>
+    {% endif %}
+    
+    <a
+      href="#001"
+      class="btn btn-outline-secondary btn-sm"
+      tabindex="-1"
+      role="button"
+      aria-disabled="true"
+      >Purchased Flights</a
+    ><a
+    href="#002"
+    class="btn btn-outline-secondary btn-sm"
+    tabindex="-1"
+    role="button"
+    aria-disabled="true"
+    >Bought Flights for Specified Duration</a
+  ><a
+  href="#003"
+  class="btn btn-outline-secondary btn-sm"
+  tabindex="-1"
+  role="button"
+  aria-disabled="true"
+  >Top Destination</a
+><a
+href="#004"
+class="btn btn-outline-secondary btn-sm"
+tabindex="-1"
+role="button"
+aria-disabled="true"
+>Public Information</a
+>
+<br>
+<br>
+<div class="card">
+  <div class="card-body">
+    <h2 id="001">Purchased Flights</h2>
+    <table class="table table-hover">
+        <th>Ticket ID</th>
+        <th>Airline Name</th>
+        <th>Flight ID</th>
+        <th>Departure Airport</th>
+        <th>Departure Time</th>
+        <th>Arrival Airport</th>
+        <th>Arrival Time</th>
+
+        {% for line in posts %}
+	    <tr>
+            <td>{{line['ticket_id']}}</td>
+            <td>{{line['airline_name']}}</td>
+            <td>{{line['flight_num']}}</td>
+            <td>{{line['departure_airport']}}</td>
+            <td>{{line['departure_time']}}</td>
+            <td>{{line['arrival_airport']}}</td>
+            <td>{{line['arrival_time']}}</td>
+            <td>{{line['status']}}</td>
+		</tr>
+        {% endfor %}
+    </table>
+  </div>
+</div>
+    
+<br>
+<div class="card">
+  <div class="card-body"><h2 id="002">View Bought Flights for Specified Duration</h2>
+        <div>
+            <form action="/customer_home/customer_viewflights" method="POST">
+            Departure range of dates:</br>
+            From</br>
+            <input type="date" name = "depart_date" placeholder="date" required>
+        </br>To</br>
+            <input type="date" name = "arrival_date" placeholder="date" required><br>
+            Departure Airport Name and City Name:</br>
+            <input type="text" name = "depart_airport" placeholder="Airport name" required/>
+            <input type="text" name = "depart_city" placeholder="City name" required/></br>
+            Arrival Airport Name and City Name:</br>
+            <input type="text" name = "arrival_airport" placeholder="Airport name" required/>
+            <input type="text" name = "arrival_city" placeholder="City name" required/></br>
+            <br>
+            <input type="submit" class="btn btn-dark" value=View>
+            </form>
+        </div>
+  </div>
+</div>
+    <br>
+        <div class="card">
+          <div class="card-body">
+            <h2 id="003">View Top Destination </h2>
+        <div>
+            <form action="/customer_home/customer_view_topdestination" method="POST">
+            </br>Choose your airline name:</br>
+            <input type="text" name = "airline_name" placeholder="Airline Name" required/>
+    <br><br>
+            <input type="submit" class="btn btn-dark" value=View>
+            </form>
+        </div>
+          </div>
+        </div>
+
+    
+<br>        <div class="card">
+          <div class="card-body">
+            <h2 id="004" style="padding-bottom: 30px; padding-top: 20px;">Public Information</h2>
+            {% if error %}
+            <p class="error"><strong>Error:</strong> {{error}}</p>
+            {% endif %}
+        
+            <section id="c_up_f">
+              <div class="card" style="width: 25rem;">
+                <div class="card-body">
+                  <h5 class="card-title">You can search for the <em1>upcoming flights</em1></h5>
+                  <h6 class="card-subtitle mb-2 text-muted">based on:</h6>
+                  <p class="card-text">
+                    <li>Depature City / Airport Name;</li>
+                  <li>Arrival City / Airport Name;</li>
+                  <li>Date.</li>
+                  </p>
+                </div>
+              </div>
+              <!-- form1 -->
+              <form action="/customer_home/customer_view_flights/flight" method="POST">
+                <div class="row g-3">
+                  <div class="col-3">
+                    <label for="Departure" class="form-label">Departure</label>
+                    <input type="text" class="form-control" name="depart_city" placeholder="Enter Departure City or Airport" aria-label="Departure City or Airport" id="Departure" required>
+                  </div>
+                  <div class="col-3">
+                    <label for="Arrival" class="form-label">Arrival</label>
+                    <input type="text" class="form-control" name="arrival_city" placeholder="Enter Arrival City or Airport" aria-label="Arrival City or Airport" id="Arrival" required>
+                  </div>
+                  <div class="col-2">
+                    <label for="Date" class="form-label">Date</label>
+                    <input type="date" class="form-control" name="depart_date" placeholder="Enter Departure Date" aria-label="Departure Date" step="1" id="Date" required>
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-dark">Submit</button>
+                  
+                    <button type="reset" class="btn btn-dark">Reset</button>
+                  </div>
+                </div>
+              </form>
+            </section>
+<hr>        
+            <section id="c_f_sta">
+              <div class="card" style="width: 25rem;">
+                <div class="card-body">
+                  <h5 class="card-title">You can search for the <em1>flights' status</em1></h5>
+                  <h6 class="card-subtitle mb-2 text-muted">based on:</h6>
+                  <p class="card-text">
+                    <li>Flight Number;</li>
+                    <li>Departure or Arrival Date.</li>
+                  </p>
+                </div>
+              </div>
+              <!-- form2 -->
+              <!-- form -->
+              <form action="/customer_home/customer_view_flights/status" method="post">
+                <div class="row g-3">
+                  <div class="col-3">
+                    <label for="Flight Number" class="form-label">Flight Number</label>
+                    <input type="text" class="form-control" name="flight_num" placeholder="Enter Flight Number" aria-label="Flight Number" id="Flight Number" required>
+                  </div>
+                  <div class="col-2">
+                    <label for="Date" class="form-label">Date</label>
+                    <input type="date" class="form-control" name="date" placeholder="Enter Departure Date" aria-label="Date" step="1" id="Date" required>
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-dark">Submit</button>
+                    <button type="reset" class="btn btn-dark">Reset</button>
+                  </div>
+                </div>
+              </form>
+          </div>
+        </div>
+               </section>
+    
+        <br />
+    
+        <a
+          href="#"
+          class="btn btn-outline-secondary"
+          tabindex="-1"
+          role="button"
+          aria-disabled="true"
+          >Back To Top</a
+        >
+        <a
+          href="https://www.google.com/search?q=weather+forecast"
+          target="_blank"
+          class="btn btn-outline-secondary"
+          tabindex="-1"
+          role="button"
+          aria-disabled="true"
+          >Weather Forecast</a
+        >
+        <a
+          href="mailto:tl3191@nyu.edu"
+          target="_blank"
+          class="btn btn-outline-secondary"
+          tabindex="-1"
+          role="button"
+          aria-disabled="true"
+          >Email Us</a
+        >
+    
+        <hr />
+        {% endblock %}
+
+</body>
+</html>

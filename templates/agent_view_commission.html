@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <title>View My Commission</title>
+    <link
+      rel="icon"
+      href="{{url_for('static',filename='images/icon_flight.png')}}"
+      type="image/x-icon"
+    />
+  </head>
+
+  <body>
+    <!-- <h2>View My Commission</h2> -->
+
+    {% extends 'base_agent.html' %} {% block content %}
+    <hr />
+    <img
+      class="header"
+      src="{{url_for('static',filename='images/icon_flight.png')}}"
+      alt="An icon of an airplane"
+    />
+
+    <h1>My Commission</h1>
+
+    <hr />
+
+    <a
+      href="/agent_home"
+      class="btn btn-outline-secondary btn-sm"
+      tabindex="-1"
+      role="button"
+      aria-disabled="true"
+      >Back</a
+    >
+
+    <div class="card" style="width: 60rem">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <span
+            >My total amount of commission received in the past 30 days:</span
+          >
+          {{total_commission}}
+        </li>
+        <li class="list-group-item">
+          <span
+            >My average commission received per ticket booked in the past 30
+            days:</span
+          >
+          {{avg_commission}}
+        </li>
+        <li class="list-group-item">
+          <span>My tickets sold in the past 30 days</span>: {{ticket_amount}}
+        </li>
+      </ul>
+    </div>
+    <br />
+    <div class="card">
+      <div class="card-body">
+        <h3>View My Commision for Specific Duration</h3>
+
+        <form action="/agent_home/agent_commission_date" method="POST">
+          From <br />
+          <input type="date" name="depart_date" placeholder="date" required />
+          <br />
+          To<br />
+          <input type="date" name="arrival_date" placeholder="date" required />
+          <br /><br />
+          <input type="submit" class="btn btn-dark" value="View" />
+        </form>
+      </div>
+    </div>
+
+    {% endblock %}
+  </body>
+</html>

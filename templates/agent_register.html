@@ -1,0 +1,59 @@
+<html>
+<head>
+    <title>SIGN UP</title>
+    <link
+      rel="icon"
+      href="{{url_for('static',filename='images/icon_flight.png')}}"
+      type="image/x-icon"
+    />
+</head>
+<body>
+  {% extends 'base.html' %} {% block content %}
+
+  <hr>
+  <img
+      class="header"
+      src="{{url_for('static',filename='images/icon_flight.png')}}"
+      alt="An icon of an airplane"
+    />
+  <h1>Booking Agent Sign Up</h1>
+  <hr>
+  <a
+  href="/register"
+  class="btn btn-outline-secondary btn-sm"
+  tabindex="-1"
+  role="button"
+  aria-disabled="true"
+  >Back</a
+></br>
+{% if error %}
+<p class="error"><strong>Error:</strong> {{error}}</p>
+{% endif %}
+  <div>
+    <form action="/agent_register" method="POST">
+      <form class="row g-3">
+        <div class="col-md-6">
+          <label for="inputEmail4" class="form-label">Email</label>
+          <input type="text" name="username" placeholder="Enter your email as your username" class="form-control" id="inputEmail4" required>
+        </div>
+        <div class="col-md-6">
+          <label for="inputPassword4" class="form-label">Password</label>
+          <input type="password" name="password" placeholder="Enter your password" class="form-control" id="inputPassword4" required>
+        </div>
+        <div class="col-md-6">
+          <label for="inputid" class="form-label">Booking Agent ID</label>
+          <input type="number" name="booking_agent_id" placeholder="Enter your booking agent id" class="form-control" id="inputid" required>
+        </div>
+        </br>
+        <div class="col-12">
+          <button type="submit" class="btn btn-dark">Sign Up</button>
+        </div>
+        <!-- Booking Agent ID <br><input type="number" name = "booking_agent_id" placeholder="booking_agent_id" required/></br><br> -->
+        <!-- <input type="submit" value = Register /> -->
+      </form>
+    </form>
+      
+  </div>
+{% endblock %}
+</body>
+</html>

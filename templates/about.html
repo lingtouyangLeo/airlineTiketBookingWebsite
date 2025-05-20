@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- help the search engine on the Internet find our webpage -->
+    <meta name="author" content="Leo Liu" />
+    <meta name="description" content="This page is about Leo & Keith" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="{{url_for('static',filename='images/icon_flight.png')}}"
+      type="image/x-icon"
+    />
+    <title>About Us</title>
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+
+  <body>
+    {% extends 'base.html' %} {% block content %}
+
+    <!-- Top part of About us page -->
+    <img
+      class="header"
+      src="{{url_for('static',filename='images/icon_flight.png')}}"
+      alt="An icon of an airplane"
+    />
+    <!-- Body part of about us page -->
+    <hr />
+    <h1>ABOUT US</h1>
+    <hr />
+    <div class="card">
+      <div class="card-header">ABOUT US</div>
+      <div class="card-body">
+        <h5 class="card-title">Basic Information</h5>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Net ID</th>
+              <th>Class Of</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tianyu Liu</td>
+              <td>tl3191</td>
+              <td>2024</td>
+            </tr>
+            <tr>
+              <td>Keith Wang</td>
+              <td>yw5326</td>
+              <td>2024</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="card">
+      <div class="card-header">About This Project</div>
+      <div class="card-body">
+        <h5 class="card-title">Basic Description</h5>
+        <p class="card-text">
+          This project is designed for Database Course. About job division,
+          Keith is more like a back-end developer, which means Keith handles
+          most part of the PYTHON coding. While Leo is more like a front-end
+          developer, which means Leo handles most part of the HTML/CSS coding.
+          Meanwhile, Leo helps Keith to solve the bugs in PYTHON files. And
+          also, Keith helps Leo to build a more fancy appearance of this
+          project.
+        </p>
+      </div>
+    </div>
+
+    <br />
+
+    <!-- <a href="#">Jump To Top</a> -->
+    <!-- <a href="about.html">About Us</a> -->
+    <!-- <a href="https://google.com" target="_blank">Google</a> -->
+
+    <a
+      href="mailto:tl3191@nyu.edu"
+      target="_blank"
+      class="btn btn-outline-secondary btn-sm"
+      tabindex="-1"
+      role="button"
+      aria-disabled="true"
+      >Email Us</a
+    >
+    <hr />
+
+    {% endblock %}
+  </body>
+</html>

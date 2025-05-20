@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>View Top 5 Customers</title>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {
+                packages: ['corechart']
+            });
+        </script>
+        <link
+        rel="icon"
+        href="{{url_for('static',filename='images/icon_flight.png')}}"
+        type="image/x-icon"
+      />
+    </head>
+    
+    <body>
+        {% extends 'base_agent.html' %} {% block content %}
+    <hr />
+    <img
+      class="header"
+      src="{{url_for('static',filename='images/icon_flight.png')}}"
+      alt="An icon of an airplane"
+    />
+
+        <h1>Top 5 Customers</h1>
+        <hr>
+
+        <a
+        href="/agent_home"
+        class="btn btn-outline-secondary btn-sm"
+        tabindex="-1"
+        role="button"
+        aria-disabled="true"
+        >Back</a
+      >   
+       <div><div class="card">
+        <div class="card-body">
+            <h2>Top 5 Customers (number of tickets bought):</h2></br>
+            <div id="container1" style="width: 700px; height: 400px; margin: 0 auto; transform: rotate(90)"></div>        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+            <h2>Top 5 Customers (amount of commissions):</h2></br>
+        <div id="container2" style="width: 700px; height: 400px; margin: 0 auto"></div>
+</div></div>
+    
+    {% if results1 %}
+        <script>
+            function drawChart1() {
+                var a = [['Customer','Tickets Bought']];
+                for (i of '{{results1}}'.split(',')){
+                    if (i != ''){
+                        a.push([i.split(' ')[1], parseInt(i.split(' ')[0])]);
+                    }
+                }
+                console.log(a);
+                var data = google.visualization.arrayToDataTable(a);
+                var options = {
+                    title: 'Top 5 Customers Spending',
+                    isStacked: true
+                };
+                var chart = new google.visualization.BarChart(document.getElementById('container1'));
+                chart.draw(data, options);
+            }
+            google.charts.setOnLoadCallback(drawChart1);
+
+            function drawChart2() {
+                var a = [['Customer','Commission']];
+                for (i of '{{results2}}'.split(',')){
+                    if (i != ''){
+                        a.push([i.split(' ')[1],parseInt(i.split(' ')[0])]);
+                    }
+                }
+                console.log(a);
+                var data = google.visualization.arrayToDataTable(a);
+                var options = {
+                    title: 'Top 5 Customers Commission',
+                    isStacked: true
+                };
+                var chart = new google.visualization.BarChart(document.getElementById('container2'));
+                chart.draw(data, options);
+            }
+            google.charts.setOnLoadCallback(drawChart2);
+        </script>
+    {% endif %}
+    {% endblock %}
+    </body>
+</html>

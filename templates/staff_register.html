@@ -1,0 +1,77 @@
+<html>
+<head>
+    <title>SIGN UP</title>
+    <link
+    rel="icon"
+    href="{{url_for('static',filename='images/icon_flight.png')}}"
+    type="image/x-icon"
+  />
+</head>
+<body>
+  {% extends 'base.html' %} {% block content %}
+
+  <hr>
+  <img
+      class="header"
+      src="{{url_for('static',filename='images/icon_flight.png')}}"
+      alt="An icon of an airplane"
+    />
+  <h1>Staff Sign Up</h1>
+  <hr>
+  <a
+    href="/register"
+    class="btn btn-outline-secondary btn-sm"
+    tabindex="-1"
+    role="button"
+    aria-disabled="true"
+    >Back</a
+  ></br>
+</br>
+{% if error %}
+<p class="error"><strong>Error:</strong> {{error}}</p>
+{% endif %}
+  <div>
+    <form action="/staff_register" method="POST">
+      <form class="row g-3">
+        <div class="col-md-6">
+          <label for="inputEmail4" class="form-label">Email</label>
+          <input type="text" name="username" placeholder="Enter your email as your username" class="form-control" id="inputEmail4" required>
+        </div>
+        <div class="col-md-6">
+          <label for="inputPassword4" class="form-label">Password</label>
+          <input type="password" name="password" placeholder="Enter your password" class="form-control" id="inputPassword4" required>
+        </div>
+        <div class="col-md-6">
+          <label for="inputfn" class="form-label">First Name</label>
+          <input type="text" name="first_name" placeholder="Enter your first name" class="form-control" id="inputfn" required>
+        </div>
+        <div class="col-md-6">
+          <label for="inputln" class="form-label">Last Name</label>
+          <input type="text" name="last_name" placeholder="Enter your last name" class="form-control" id="inputln" required>
+        </div>
+        <div class="col-md-6">
+          <label for="inputdate" class="form-label">Date of Birth</label>
+          <input type="text" name="date_of_birth" placeholder="Enter your date of birth" class="form-control" id="inputdate" required>
+        </div>
+        <div class="col-md-6">
+          <label for="inputan" class="form-label">Airline Name</label>
+          <input type="text" name="airline_name" placeholder="Enter your airline name" class="form-control" id="inputan" required>
+        </div>
+        </br>
+        <div class="col-12">
+          <button type="submit" class="btn btn-dark">Sign Up</button>
+        </div>
+        <!-- Email <br><input type="text" name = "username" placeholder="username" required/> </br>
+        Password <br><input type="password" name = "password" placeholder="password" required/> </br>
+        First_name <br><input type="text" name = "first_name" placeholder="first_name" required/> </br>
+        Last_name <br><input type="text" name = "last_name" placeholder="last_name" required/> </br>
+        Date_of_birth <br><input type="text" name = "date_of_birth" placeholder="date_of_birth" required/> </br>
+        Airline_name <br><input type="text" name = "airline_name" placeholder="airline_name" required/> </br>
+        <input type="submit" value = Register /> -->
+      </form>
+    </form>
+      
+  </div>
+  {% endblock %}
+</body>
+</html>

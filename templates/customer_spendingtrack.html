@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Total Spending</title>
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <script type="text/javascript">
+      google.charts.load("current", {
+        packages: ["corechart"],
+      });
+    </script>
+    <link
+      rel="icon"
+      href="{{url_for('static',filename='images/icon_flight.png')}}"
+      type="image/x-icon"
+    />
+  </head>
+
+  <body>
+    {% extends 'base_customer.html' %} {% block content %}
+
+    <hr />
+    <img
+      class="header"
+      src="{{url_for('static',filename='images/icon_flight.png')}}"
+      alt="An icon of an airplane"
+    />
+    <h1>Spending</h1>
+    <hr />
+    <a
+      href="/customer_home"
+      class="btn btn-outline-secondary btn-sm"
+      tabindex="-1"
+      role="button"
+      aria-disabled="true"
+      >Back</a
+    >
+
+    <div class="card">
+      <div class="card-body">
+        <!-- <h3>Track My Spending</h3> -->
+        <span>Total amount of money spent in the past year: </span
+        >{{totalamount}}
+        <!-- Bar chart!!! -->
+        {% if results %}
+        <div
+          id="container"
+          style="width: 550px; height: 400px; margin: 0 auto"
+        ></div>
+        <script language="JavaScript">
+          function drawChart() {
+            var a = [["Month", "Spending"]];
+            for (i of "{{results}}".split(",")) {
+              if (i != "") {
+                a.push([parseInt(i.split(" ")[1]), parseInt(i.split(" ")[0])]);
+              }
+            }
+            console.log(a);
+            var data = google.visualization.arrayToDataTable(a);
+            var options = {
+              title: "Monthwise Spending",
+              isStacked: true,
+            };
+            var chart = new google.visualization.BarChart(
+              document.getElementById("container")
+            );
+            chart.draw(data, options);
+          }
+          google.charts.setOnLoadCallback(drawChart);
+        </script>
+        {% endif %}
+
+        <hr />
+        <h4>Track My Spending for Specified Duration</h4>
+        <div>
+          <form
+            action="/customer_home/customer_spendingtrack_specific"
+            method="POST"
+          >
+            From <br />
+            <input type="date" name="depart_date" placeholder="date" required />
+            <br />
+            To<br />
+            <input
+              type="date"
+              name="arrival_date"
+              placeholder="date"
+              required
+            />
+            <br /><br />
+            <input type="submit" class="btn btn-dark" value="View" />
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+  </body>
+</html>

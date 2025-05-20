@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="icon"
+      href="{{url_for('static',filename='images/icon_flight.png')}}"
+      type="image/x-icon"
+    />
+    <title>Staff Home</title>
+  </head>
+  <body>
+    {% extends 'base_staff.html' %} {% block content %}
+    <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+      <strong>Welcome! {{username}} !</strong>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+
+    <ul>
+      <li><a href="/staff_home/staff_searchflight">View Flights</a></li>
+      <li><a href="/staff_home/staff_add_airplane">Add Airplane</a></li>
+      <li><a href="/staff_home/staff_add_airport">Add Airport</a></li>
+      <li><a href="/staff_home/staff_agent">View Booking Agents</a></li>
+      <li><a href="/staff_home/staff_customer">View Customers</a></li>
+      <li><a href="/staff_home/staff_view_reports">View Reports</a></li>
+      <li><a href="/staff_home/staff_Revenues">View Revenues</a></li>
+      <li>
+        <a href="/staff_home/staff_topDestinations">View Top Destinations</a>
+      </li>
+      <li>
+        <a href="/staff_home/staff_grant_newpermissions"
+          >View Grant New Permissions</a
+        >
+      </li>
+      <li><a href="/staff_home/staff_addagent">View Add Booking Agents</a></li>
+      <li><a href="/logout"> Logout</a></li>
+    </ul>
+
+    {% if message %}
+    <h2>{{message}}</h2>
+    {% endif %} {% endblock %}
+  </body>
+</html>

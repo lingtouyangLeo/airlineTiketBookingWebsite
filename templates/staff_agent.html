@@ -1,0 +1,99 @@
+<html>
+    <head>
+        <title>View Booking Agents</title>
+        <link
+        rel="icon"
+        href="{{url_for('static',filename='images/icon_flight.png')}}"
+        type="image/x-icon"
+      />
+    </head>
+    
+    <body>
+        
+  {% extends 'base_staff.html' %} {% block content %}
+  <hr />
+  <img
+    class="header"
+    src="{{url_for('static',filename='images/icon_flight.png')}}"
+    alt="An icon of an airplane"
+  />
+  <h1>View Booking Agents</h1>
+  <hr>
+  <a
+  href="/staff_home"
+  class="btn btn-outline-secondary btn-sm"
+  tabindex="-1"
+  role="button"
+  aria-disabled="true"
+  >Back</a
+>
+
+        </br>{% if error %}
+                <p class="error"><strong>Error:</strong> {{error}}</p>
+        {% endif %}
+
+        
+    </br>
+        {% if data1 %}
+        <div class="card">
+            <div class="card-body">
+            <b> Top 5 booking agents based on number of tickets sales for the past month:</b></br>
+            <table class="table table-hover">
+                <th>Booking Agent Email</th>
+                <th>Tickets Sold Last Month</th>
+                
+            {% for line in data1 %}
+                <tr>
+                    <td>{{line['email']}}</td>
+                    <td>{{line['ticket_sales']}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div></div>
+            
+        {% endif %}</br>
+
+        {% if data2 %}<div class="card">
+            <div class="card-body">
+            <b> Top 5 booking agents based on number of tickets sales for the past year:</b></br>
+            <table class="table table-hover">
+                <th>Booking Agent Email</th>
+                <th>Tickets Sold Last Year</th>
+                
+            {% for line in data2 %}
+                <tr>
+                    <td>{{line['email']}}</td>
+                    <td>{{line['ticket_sales']}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div></div>
+            
+        {% endif %}</br>
+
+        {% if data3 %}
+        <div class="card">
+            <div class="card-body">
+        
+            <b> Top 5 booking agents based on the amount of commission received for the last year: </b></br>
+            <table class="table table-hover">
+                <th>Booking Agent Email</th>
+                <th>Total Commission Last Year</th>
+                
+            {% for line in data3 %}
+                <tr>
+                    <td>{{line['email']}}</td>
+                    <td>{{line['totalcommission']}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div></div>
+            
+        {% endif %}</br>
+
+        
+
+    </body>
+{%endblock%}
+
+</html>

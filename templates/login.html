@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link
+      rel="icon"
+      href="{{url_for('static',filename='images/icon_flight.png')}}"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    {% extends 'base.html' %} {% block content %}
+    <hr />
+    <img
+      class="header"
+      src="{{url_for('static',filename='images/icon_flight.png')}}"
+      alt="An icon of an airplane"
+    />
+
+    <h1>Log In</h1>
+    <hr />
+
+    <a
+      href="/"
+      class="btn btn-outline-secondary btn-sm"
+      tabindex="-1"
+      role="button"
+      aria-disabled="true"
+      >Back</a
+    >
+
+    {% if error %}
+    <p class="error"><strong>Error:</strong> {{error}}</p>
+    {% endif %}
+    <div class="card">
+      <div class="card-body">
+        <form action="/login_authenticate" method="POST">
+          <form>
+            <fieldset class="row mb-3">
+              <legend class="col-form-label col-sm-2 pt-0">User Type</legend>
+              <div class="col-sm-10">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="usertype"
+                    id="gridRadios1"
+                    value="customer"
+                  />
+                  <label class="form-check-label" for="gridRadios1">
+                    Customer
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="usertype"
+                    id="gridRadios2"
+                    value="agent"
+                  />
+                  <label class="form-check-label" for="gridRadios2">
+                    Booking Agent
+                  </label>
+                </div>
+                <div class="form-check disabled">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="usertype"
+                    id="gridRadios3"
+                    value="staff"
+                  />
+                  <label class="form-check-label" for="gridRadios3">
+                    Staff
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+            <div class="row mb-3">
+              <label for="inputEmail3" class="col-sm-2 col-form-label"
+                >Email / Username</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="Enter your email or username"
+                  class="form-control"
+                  id="inputEmail3"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputPassword3" class="col-sm-2 col-form-label"
+                >Password</label
+              >
+              <div class="col-sm-10">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Enter your password"
+                  class="form-control"
+                  id="inputPassword3"
+                  required
+                />
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-dark">Log In</button>
+          </form>
+
+          <!-- User Type: <br> 
+        <input type='radio' name='usertype' value='customer'/> customer 
+        <input type='radio' name='usertype' value='staff'/> staff
+        <input type='radio' name='usertype' value='agent'/> agent
+        <br />
+        Email / Username <br><input type="text" name = "username" placeholder="username" required/> </br>
+        Password <br><input type="password" name = "password" placeholder="password" required/> </br>
+        <input type="submit" value='Login'/> -->
+        </form>
+      </div>
+    </div>
+
+    {% endblock %}
+
+    <hr />
+  </body>
+</html>

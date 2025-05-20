@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Book As Agent</title>
+    <link
+      rel="icon"
+      href="{{url_for('static',filename='images/icon_flight.png')}}"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    {% extends 'base_agent.html' %} {% block content %}
+    <hr />
+    <img
+      class="header"
+      src="{{url_for('static',filename='images/icon_flight.png')}}"
+      alt="An icon of an airplane"
+    />
+
+    <h1>Booking Ticket</h1>
+    <hr />
+    <a
+    href="/agent_home"
+    class="btn btn-outline-secondary btn-sm"
+    tabindex="-1"
+    role="button"
+    aria-disabled="true"
+    >Back</a
+  ></br><br>
+  <div class="card">
+    <div class="card-body">
+
+      <h3>I. Please enter departure and destination informaion:</h3>
+      <div>
+        <form action="/agent_home/agent_purchase_search" method="POST">
+          From <br />
+          <input type="text" name="depart_city" placeholder="city" required />
+          <input
+            type="text"
+            name="depart_airport"
+            placeholder="airport"
+            required
+          />
+          <input type="date" name="depart_date" placeholder="date" required />
+          <br /><br />
+          To <br />
+          <input type="text" name="arrival_city" placeholder="city" required />
+          <input
+            type="text"
+            name="arrival_airport"
+            placeholder="airport"
+            required
+          />
+          <input type="date" name="arrival_date" placeholder="date" required />
+          <br />
+          <br />
+          <input type="submit" class="btn btn-dark" value="Search" />
+        </form>
+      </div>
+  <hr>
+      <h3>Flights available based on your chosen options:</h3>
+      <div>
+        <table class="table table-hover">
+          <th>Airline Name</th>
+          <th>Flight Number</th>
+          <th>Departure Airport</th>
+          <th>Departure Time</th>
+          <th>Arrival Airport</th>
+          <th>Arrival Time</th>
+          <th>Price</th>
+          <th>Airplane ID</th>
+  
+          {% for line in results %}
+          <tr>
+            <td>{{line['airline_name']}}</td>
+            <td>{{line['flight_num']}}</td>
+            <td>{{line['departure_airport']}}</td>
+            <td>{{line['departure_time']}}</td>
+            <td>{{line['arrival_airport']}}</td>
+            <td>{{line['arrival_time']}}</td>
+            <td>{{line['price']}}</td>
+            <td>{{line['airplane_id']}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% if searchError %}
+        <p class="error"><strong>Error:</strong> {{searchError}}</p>
+        {% endif %}
+      </div>
+  <hr>
+      <h3>II. Book the flight</h3>
+      <div>
+        <form action="/agent_home/agent_purchase" method="POST">
+          Your Client Email <br />
+          <input
+            type="text"
+            name="customer_email"
+            placeholder="customer_email"
+            required
+          />
+          <br /><br />
+          Choose the flight: <br />
+          Airline Name <br /><input
+            type="text"
+            name="airline"
+            placeholder="airline"
+            required
+          />
+          <br />
+          Flight Number <br /><input
+            type="text"
+            name="flight_num"
+            placeholder="flight_num"
+            required
+          />
+          <br />
+          <br />
+          <input type="submit" class="btn btn-dark" value="Purchase" />
+        </form>
+        <br /><br />
+        {% if purchaseError %}
+        <p class="error"><strong>Error:</strong> {{purchaseError}}</p>
+        {% endif %}
+      </div>    </div>
+  </div>
+    {% endblock %}
+  </body>
+</html>

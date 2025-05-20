@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      href="{{url_for('static',filename='images/icon_flight.png')}}"
+      type="image/x-icon"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 NOT FOUND</title>
+  </head>
+  <body>
+    {% extends 'base.html' %} {% block content %}
+
+    <br />
+
+    <center>
+      <h1>404 ERROR</h1>
+      <p>Page Not Found. Please Try Again~</p>
+    </center>
+    {% endblock %}
+  </body>
+</html>

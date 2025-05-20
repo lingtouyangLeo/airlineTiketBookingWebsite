@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <title>viewreport</title>
+        <link
+        rel="icon"
+        href="{{url_for('static',filename='images/icon_flight.png')}}"
+        type="image/x-icon"
+      />
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            google.charts.load('current', {
+                packages: ['corechart']
+            });
+        </script>
+    </head>
+    <body>
+
+        {% extends 'base_staff.html' %} {% block content %}
+        <hr />
+        <img
+          class="header"
+          src="{{url_for('static',filename='images/icon_flight.png')}}"
+          alt="An icon of an airplane"
+        />
+        <h1>Here is the report</h1>
+        <hr>
+        <a
+        href="/staff_home"
+        class="btn btn-outline-secondary btn-sm"
+        tabindex="-1"
+        role="button"
+        aria-disabled="true"
+        >Back</a
+      ><a
+      href="/staff_home/staff_view_reports"
+      class="btn btn-outline-secondary btn-sm"
+      tabindex="-1"
+      role="button"
+      aria-disabled="true"
+      >Refresh</a
+    >
+        {% if error %}
+                <p class="error"><strong>Error:</strong> {{error}}</p>
+        {% endif %}
+        <div class="card">
+            <div class="card-body">
+        
+        {% if message %}
+            <h2>The result:</h2>
+            <h3>{{message}}</h3></br>
+        {% endif %}
+        
+    </br>{% if results %}
+            <div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+            <script language="JavaScript">
+                function drawChart() {
+                    var a = [['Month','Ticket Sold']];
+                    for (i of '{{results}}'.split(',')){
+                        if (i != ''){
+                            a.push([i.split(' ')[0],parseInt(i.split(' ')[1])]);
+                        }
+                    }
+                    console.log(a);
+                    var data = google.visualization.arrayToDataTable(a);
+                    var options = {
+                        title: 'Monthwise ticket sold',
+                        isStacked: true
+                    };
+                    var chart = new google.visualization.BarChart(document.getElementById('container'));
+                    chart.draw(data, options);
+                }
+                google.charts.setOnLoadCallback(drawChart);
+            </script>
+        {% endif %}
+            </div></div>
+
+        </br>
+        <div class="card">
+            <div class="card-body">
+        <form action="/staff_home/staff_view_reports/period" method="POST">
+            <h3>Choose report in the past</h3></br>
+            <input type="radio" name="period" value="month" required> Month
+            <input type="radio" name="period" value="year"> Year</br><br>
+            <input type="submit" class="btn btn-dark" value = Search />
+        </form>
+        <hr>
+
+        <form action="/staff_home/staff_view_reports/date" method="POST">
+            <h3>Choose report between dates</h3></br>
+            <b>Starting Time:</b></br>
+            <input type="date" name="start" step=1 required/> </br>
+            <b>Ending Time:</b></br>
+            <input type="date" name="end" step=1 required/> </br><br>
+            <input type="submit" class="btn btn-dark" value = Search />
+        </form>
+            </div></div>
+    </br>
+        
+    </div>
+        
+{%endblock%}
+    </body>
+
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Total Period Spending</title>
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <script type="text/javascript">
+      google.charts.load("current", {
+        packages: ["corechart"],
+      });
+    </script>
+    <link
+      rel="icon"
+      href="{{url_for('static',filename='images/icon_flight.png')}}"
+      type="image/x-icon"
+    />
+  </head>
+
+  <body>
+    {% extends 'base_customer.html' %} {% block content %}
+    <hr />
+    <img
+      class="header"
+      src="{{url_for('static',filename='images/icon_flight.png')}}"
+      alt="An icon of an airplane"
+    />
+    <h1>My Spending from {{depart_date}} to {{arrival_date}}</h1>
+    <hr />
+    <a
+      href="/customer_home"
+      class="btn btn-outline-secondary btn-sm"
+      tabindex="-1"
+      role="button"
+      aria-disabled="true"
+      >Back</a
+    >
+    <div class="card">
+      <div class="card-body">
+        <h3><span>Total amount of money spent: </span> {{total}}<br /></h3>
+        <!-- Bar Chart!! -->
+        {% if results %}
+        <div
+          id="container"
+          style="width: 550px; height: 400px; margin: 0 auto"
+        ></div>
+
+        <script language="JavaScript">
+          function drawChart() {
+            var a = [["Month", "Spending"]];
+            var yticks = [];
+            for (i of "{{results}}".split(",")) {
+              if (i != "") {
+                a.push([parseInt(i.split(" ")[1]), parseInt(i.split(" ")[0])]);
+                yticks.push(parseInt(i.split(" ")[0]));
+              }
+            }
+            console.log(a);
+            var data = google.visualization.arrayToDataTable(a);
+            var options = {
+              title: "Monthwise Spending",
+              isStacked: true,
+              vAxis: { format: "#" },
+            };
+            var chart = new google.visualization.BarChart(
+              document.getElementById("container")
+            );
+            chart.draw(data, options);
+          }
+          google.charts.setOnLoadCallback(drawChart);
+        </script>
+        {% endif %}
+      </div>
+    </div>
+
+    {% endblock %}
+  </body>
+</html>

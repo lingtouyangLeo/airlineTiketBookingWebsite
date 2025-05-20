@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <title>FUTURE FLIGHTS</title>
+  </head>
+
+  <body>
+    {% extends 'base_agent.html' %} {% block content %}
+    <hr />
+    <img
+      class="header"
+      src="{{url_for('static',filename='images/icon_flight.png')}}"
+      alt="An icon of an airplane"
+    />
+
+    <h1>OUTBOUND:</h1>
+    <hr />
+    <a
+      href="/agent_home"
+      class="btn btn-outline-secondary btn-sm"
+      tabindex="-1"
+      role="button"
+      aria-disabled="true"
+      >Back</a
+    >
+    <br />
+    <div>
+      <table class="table table-hover">
+        <th>airline_name</th>
+        <th>flight_num</th>
+        <th>departure_airport</th>
+        <th>departure_time</th>
+        <th>arrival_airport</th>
+        <th>arrival_time</th>
+        <th>price</th>
+        <th>status</th>
+        <th>airplane_id</th>
+        {% for line in results %}
+        <tr>
+          <td>{{line['airline_name']}}</td>
+          <td>{{line['flight_num']}}</td>
+          <td>{{line['departure_airport']}}</td>
+          <td>{{line['departure_time']}}</td>
+          <td>{{line['arrival_airport']}}</td>
+          <td>{{line['arrival_time']}}</td>
+          <td>{{line['price']}}</td>
+          <td>{{line['status']}}</td>
+          <td>{{line['airplane_id']}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    {% endblock %}
+  </body>
+</html>

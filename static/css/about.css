@@ -1,0 +1,10 @@
+body{
+    background: rgb(211, 205, 211);
+}
+
+table, tr, th, td, caption {
+    border: 1px solid rgb(20, 20, 20);
+    font-family: 'Courier New', Courier, monospace;
+    border-collapse: collapse;
+    padding: 0.5rem;
+}

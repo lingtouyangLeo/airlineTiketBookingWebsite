@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <meta charset="utf-8"> 
+        <link
+        rel="icon"
+        href="{{url_for('static',filename='images/icon_flight.png')}}"
+        type="image/x-icon"
+      />
+        <title>Staff Home</title> 
+    </head>
+    <body>
+        {% extends 'base_staff.html' %} {% block content %}
+        <hr />
+        <img
+          class="header"
+          src="{{url_for('static',filename='images/icon_flight.png')}}"
+          alt="An icon of an airplane"
+        />
+        <h1>Update Flight Info</h1>
+        <hr>
+        <a
+        href="/staff_home"
+        class="btn btn-outline-secondary btn-sm"
+        tabindex="-1"
+        role="button"
+        aria-disabled="true"
+        >Back</a
+      ><br>
+    {% if error %}
+        <p class="error"><strong>Error:</strong> {{error}}</p>
+    {% endif %}
+<br>
+<div class="card">
+    <div class="card-body">
+        {% if session.get('admin') %}
+        <h2>Create Flight</h2>
+    
+        <div>
+            <form action="/staff_home/staff_searchflight/updating" method="POST">
+                <input type="number" name = "flight_num" placeholder="Flight Number" required/> </br>
+                <input type="text" name = "depart_airport" placeholder="Departure Airport" required/> </br>
+                <b>Departure Time</b> </br>
+                <input type=datetime-local name = "depart_date" step="1" required> </br>
+                <input type="text" name = "arrival_airport" placeholder="Arrival Airport" required/> </br>
+                <b>Arrival Time</b> </br>
+                <input type=datetime-local name = "arrival_date" step="1" required> </br>
+                <input type="number" name = "price" placeholder="Ticket Price" required/> </br>
+                <input type="text" name = "airplane_id" placeholder="Airplane ID" required/> </br><br>
+                <input type="submit" class="btn btn-dark" value = Submit />
+            </form>
+        </div>
+    {% else %}
+        <hr>
+            <h2>Update Flight Status</h2>
+        <div>
+            <form action="/staff_home/staff_searchflight/modify_status" method="POST">
+                <input type="text" name = "flight_num" placeholder="Flight Number" required/> </br>
+                <input type="radio" name="status" value="Upcoming" required> Upcoming
+                <input type="radio" name="status" value="Delayed"> Delayed
+                <input type="radio" name="status" value="In-progress"> In Progress
+                <input type="radio" name="status" value="Arrived"> Arrived <br><br>
+                <input type="submit" class="btn btn-dark" value = Update />
+            </form>
+        </div> 
+        {% endif %}
+       </div>
+  </div>
+    
+    
+    {%endblock%}
+
+</body>
+
+
+</html>

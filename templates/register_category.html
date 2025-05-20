@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link
+    rel="icon"
+    href="{{url_for('static',filename='images/icon_flight.png')}}"
+    type="image/x-icon"
+  />
+</head>
+<body>
+  {% extends 'base.html' %} {% block content %}
+<hr>
+<img
+      class="header"
+      src="{{url_for('static',filename='images/icon_flight.png')}}"
+      alt="An icon of an airplane"
+    />
+<h1> Sign Up </h1>
+<hr>
+<a
+      href="/"
+      class="btn btn-outline-secondary btn-sm"
+      tabindex="-1"
+      role="button"
+      aria-disabled="true"
+      >Back</a
+    >
+<h3>Choose an identity to sign up.</h3>
+<form action = "/register_category" method = "POST">
+  <fieldset class="row mb-3">
+    <legend class="col-form-label col-sm-2 pt-0">User Type:</legend>
+    <div class="col-sm-10">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="usertype" id="gridRadios1" value="agent">
+        <label class="form-check-label" for="gridRadios1">
+          Agent
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="usertype" id="gridRadios2" value="customer">
+        <label class="form-check-label" for="gridRadios2">
+          Customer
+        </label>
+      </div>
+      <div class="form-check disabled">
+        <input class="form-check-input" type="radio" name="usertype" id="gridRadios3" value="staff">
+        <label class="form-check-label" for="gridRadios3">
+          Staff
+        </label>
+      </div>
+    </div>
+  </fieldset>
+  <button type="submit" class="btn btn-dark">Sign Up</button>
+</form>
+</br>
+
+    {% endblock %}
+</body>
+</html>

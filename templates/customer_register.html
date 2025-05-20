@@ -1,0 +1,102 @@
+<html>
+<head>
+    <title>SIGN UP</title>
+    <link
+      rel="icon"
+      href="{{url_for('static',filename='images/icon_flight.png')}}"
+      type="image/x-icon"
+    />
+</head>
+<body>
+    {% extends 'base.html' %} {% block content %}
+
+  <hr>
+  <img
+      class="header"
+      src="{{url_for('static',filename='images/icon_flight.png')}}"
+      alt="An icon of an airplane"
+    />
+    <h1>Customer Sign Up</h1>
+    <hr>
+    <a
+    href="/register"
+    class="btn btn-outline-secondary btn-sm"
+    tabindex="-1"
+    role="button"
+    aria-disabled="true"
+    >Back</a
+  ></br>
+    <div>
+        <form action="/customer_register" method="POST">
+          <form class="row g-3">
+            <div class="col-md-6">
+              <label for="inputEmail4" class="form-label">Email</label>
+              <input type="text" name="username" placeholder="Enter your email as your username" class="form-control" id="inputEmail4" required>
+            </div>
+            <div class="col-md-6">
+              <label for="inputPassword4" class="form-label">Password</label>
+              <input type="password" name="password" placeholder="Enter your password" class="form-control" id="inputPassword4" required>
+            </div>
+            <div class="col-md-6">
+              <label for="inputname" class="form-label">Name</label>
+              <input type="text" name="name" placeholder="Enter your name" class="form-control" id="inputname" required>
+            </div>
+            <div class="col-md-6">
+              <label for="inputbn" class="form-label">Building Number</label>
+              <input type="text" name="building_number" placeholder="Enter your building number" class="form-control" id="inputbn" required>
+            </div>
+            <div class="col-md-6">
+              <label for="inputAddress2" class="form-label">Street</label>
+              <input type="text" name="street" class="form-control" id="inputAddress2" placeholder="Enter your street" required>
+            </div>
+            <div class="col-md-6">
+              <label for="inputCity" class="form-label">City</label>
+              <input type="text" name="city" placeholder="Enter your city" class="form-control" id="inputCity" required>
+            </div>
+            <div class="col-md-6">
+              <label for="inputState" class="form-label">State</label>
+              <input type="text" name="state" placeholder="Enter your state" class="form-control" id="inputState" required>
+            </div>
+            <div class="col-md-6">
+              <label for="inputpn" class="form-label">Phone Number</label>
+              <input type="text" name="phone_number" placeholder="Enter your phone number" class="form-control" id="inputpn" required>
+            </div>
+            <div class="col-md-6">
+              <label for="inputpassport" class="form-label">Passport Number</label>
+              <input type="text" name="passport_number" placeholder="Enter your passport number" class="form-control" id="inputpassport" required>
+            </div>
+            <div class="col-md-6">
+              <label for="inputexpire" class="form-label">Passport Expiration</label>
+              <input type="text" name="passport_expiration" placeholder="Enter your passport expiration" class="form-control" id="inputexpire" required>
+            </div>
+            <div class="col-md-6">
+              <label for="inputpc" class="form-label">Passport Country</label>
+              <input type="text" name="passport_country" placeholder="Enter your passport country" class="form-control" id="inputpc" required>
+            </div>
+            <div class="col-md-6">
+              <label for="inputdb" class="form-label">Date_of_birth</label>
+              <input type="text" name="date_of_birth" placeholder="Enter your date of birth" class="form-control" id="inputdb" required>
+            </div>
+          </br>
+            <div class="col-12">
+              <button type="submit" class="btn btn-dark">Sign Up</button>
+            </div>
+          </form>
+            <!-- Building_number <br><input type="text" name = "building_number" placeholder="building_number" required/> </br>
+            Street <br><input type="text" name = "street" placeholder="street" required/> </br>
+            City <br><input type="text" name = "city" placeholder="city" required/> </br>
+            State <br><input type="text" name = "state" placeholder="state" required/> </br>
+            Phone_number <br><input type="text" name = "phone_number" placeholder="phone_number" required/> </br>
+            Passport_number <br><input type="text" name = "passport_number" placeholder="passport_number" required/> </br>
+            Passport_expiration <br><input type="text" name = "passport_expiration" placeholder="passport_expiration" required/> </br>
+            Passport_country <br><input type="text" name = "passport_country" placeholder="passport_country" required/> </br>
+            Date_of_birth <br><input type="text" name = "date_of_birth" placeholder="date_of_birth" required/> </br> -->
+            {% if error %}
+                <p class="error"><strong>Error:</strong> {{error}}</p>
+            {% endif %}
+        </form>
+    </div>
+
+{% endblock %}
+</body>
+</html>
